@@ -1,0 +1,30 @@
+<h2>Find stock price!</h2>
+
+<form class="" action="/stock" method="post">
+  <input type="text" name="ticker" placeholder="AAPL">
+  <button type="button" name="find-button">Find!</button>
+</form>
+
+
+<h1> <%= @display_stock%> </h1>
+
+<table class="table"> <%= @name%>
+  <tr>
+    <td class="keys">OPEN</td>
+    <td class="values"> <%= @open%> </td>
+    <td class="keys">CHANGE</td>
+    <td class="values"> <%= @change%> </td>
+  </tr>
+  <tr>
+    <td class="keys">HIGH</td>
+    <td class="values"> <%= @high%> </td>
+    <td class="keys">VOL</td>
+    <td class="values"> <%= @volume%> </td>
+  </tr>
+  <tr>
+    <td class="keys">LOW</td>
+    <td class="values"> <%= @low%> </td>
+    <td class="keys">AVG VOL</td>
+    <td class="values"> <%= @average_volume%> </td>
+  </tr>
+</table>
