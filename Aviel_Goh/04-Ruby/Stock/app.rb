@@ -1,3 +1,4 @@
+require 'pry'
 require 'sinatra'
 require 'yahoofinance'
 require 'sinatra/reloader'
@@ -12,27 +13,40 @@ get '/' do
   erb :index
 end
 
-post '/stock' do
+get '/stock' do
 
   @ticker = params[:ticker]
 
-  @price = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}")["#{@ticker}"].lastTrade
+  redirect to "/stock/#{@ticker}"
 
-  @name = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}")["#{@ticker}"].name
+end
 
-  @open = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}")["#{@ticker}"].open
+get '/stock/:ticker' do
 
-  @high = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}")["#{@ticker}"].dayHigh
+  @ticker = params[:ticker]
 
-  @low = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}")["#{@ticker}"].dayLow
+  data = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}") # standard information
 
-  @change = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}")["#{@ticker}"].changePercent
+  detailed_data = YahooFinance::get_quotes(YahooFinance::ExtendedQuote, "#{@ticker}") # more detailed information
 
-  @volume = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}")["#{@ticker}"].volume
+  @price = data["#{@ticker}"].lastTrade
+  @price_change = data["#{@ticker}"].change.split(' - ')[0]
+  @percentage_change = data["#{@ticker}"].change.split(' - ')[1]
 
-  @average_volume = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}")["#{@ticker}"].averageDailyVolume
+  @name = data["#{@ticker}"].name
 
-  @display_stock = "The price of #{@ticker} is $#{@price}"
+  @open = data["#{@ticker}"].open
+  @high = data["#{@ticker}"].dayHigh
+  @low = data["#{@ticker}"].dayLow
+  @volume = data["#{@ticker}"].volume.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse
+  @pe = detailed_data["#{@ticker}"].peRatio
+  @market_cap = detailed_data["#{@ticker}"].marketCap
+  @w52_low = detailed_data["#{@ticker}"].weeks52Range.split(' - ')[0]
+  @w52_high = detailed_data["#{@ticker}"].weeks52Range.split(' - ')[1]
+  @average_volume = data["#{@ticker}"].averageDailyVolume.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse
+  @yield = detailed_data["#{@ticker}"].dividendYield
+  @eps = detailed_data["#{@ticker}"].earningsPerShare
+  @ebitda = detailed_data["#{@ticker}"].ebitda
 
   erb :index
 

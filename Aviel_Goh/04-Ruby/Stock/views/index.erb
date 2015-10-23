@@ -1,30 +1,56 @@
-<h2>Find stock price!</h2>
+<div class="search-box">
+  <form class="" action="/stock" method="get">
+    <input type="text" name="ticker" placeholder="Search by ticker">
+    <button type="button" name="find-button"><i class="fa fa-search"></i></button>
+  </form>
+</div>
 
-<form class="" action="/stock" method="post">
-  <input type="text" name="ticker" placeholder="AAPL">
-  <button type="button" name="find-button">Find!</button>
-</form>
+
+<div class="price">
+  <div id="ticker"><%= @ticker%></div>
+  <div id="price"><%= @price%></div>
+  <div id="change"><%= @price_change%></div>
+  <div id="change">(<%= @percentage_change%>)</div>
+</div>
 
 
-<h1> <%= @display_stock%> </h1>
-
-<table class="table"> <%= @name%>
+<h3><%= @name%> (<%= @ticker%>)</h2>
+<table class="table" align="center" cellspacing="0px">
   <tr>
     <td class="keys">OPEN</td>
-    <td class="values"> <%= @open%> </td>
-    <td class="keys">CHANGE</td>
-    <td class="values"> <%= @change%> </td>
+    <td class="values values_mid"> <%= @open%> </td>
+    <td class="keys keys_mid">MKT CAP</td>
+    <td class="values"> <%= @market_cap%> </td>
   </tr>
   <tr>
     <td class="keys">HIGH</td>
-    <td class="values"> <%= @high%> </td>
-    <td class="keys">VOL</td>
-    <td class="values"> <%= @volume%> </td>
+    <td class="values values_mid"> <%= @high%> </td>
+    <td class="keys keys_mid">52W HIGH</td>
+    <td class="values"> <%= @w52_high%> </td>
   </tr>
   <tr>
     <td class="keys">LOW</td>
-    <td class="values"> <%= @low%> </td>
-    <td class="keys">AVG VOL</td>
+    <td class="values values_mid"> <%= @low%> </td>
+    <td class="keys keys_mid">52W LOW</td>
+    <td class="values"> <%= @w52_low%> </td>
+  </tr>
+  <tr>
+    <td class="keys">VOL</td>
+    <td class="values values_mid"> <%= @volume%> </td>
+    <td class="keys keys_mid">AVG VOL</td>
     <td class="values"> <%= @average_volume%> </td>
   </tr>
+  <tr>
+    <td class="keys">P/E</td>
+    <td class="values values_mid"> <%= @pe%> </td>
+    <td class="keys keys_mid">YIELD</td>
+    <td class="values"> <%= @yield%> </td>
+  </tr>
+  <tr>
+    <td class="keys">EBITDA</td>
+    <td class="values values_mid"> <%= @ebitda%> </td>
+    <td class="keys keys_mid">EPS</td>
+    <td class="values"> <%= @eps%> </td>
+  </tr>
+
 </table>
