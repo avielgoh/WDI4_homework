@@ -56,7 +56,7 @@ The real-time data retrieved then needed to be categorised and displayed in a us
 
 #### Feature request
 
-In the future, I would like to add conditional colouring to the price change and percentage change boxes i.e. a green background when positive and a red background when negative.
+In the future, I would like to add functionality for the user to add and track a selection of stocks with real-time updates.
 
 #### Links
 

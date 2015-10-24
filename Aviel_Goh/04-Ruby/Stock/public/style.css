@@ -9,7 +9,7 @@ html {
 body {
   text-align: center;
   margin: 0 auto;
-  background-color: black;
+  background-color: rgb(35, 35, 35);
   color: white;
   overflow: hidden;
   font-family: 'Roboto Condensed', sans-serif;
@@ -26,7 +26,7 @@ h1 {
   margin: 0 auto;
   margin-top: 5%;
   background-color: white;
-  color: black;
+  color: rgb(35, 35, 35);
   width: 420px;
 }
 
@@ -79,7 +79,7 @@ button {
   margin: 10% 0 10% 0;
 }
 
-#ticker, #change, #price {
+#ticker, .green, #price, .red, .change {
   display: inline-block;
   vertical-align: middle;
   line-height: 2.3em;
@@ -95,7 +95,7 @@ button {
   margin-right: 3%;
 }
 
-#change {
+.change {
   margin-left: 1%;
   font-size: 1.1em;
   width: 5em;
@@ -103,7 +103,29 @@ button {
   line-height: 1.6em;
   border-radius: 4%;
   background-color: white;
-  color: black;
+  color: rgb(35, 35, 35);
+}
+
+.red {
+  margin-left: 1%;
+  font-size: 1.1em;
+  width: 5em;
+  border: 1px solid red;
+  line-height: 1.6em;
+  border-radius: 4%;
+  background-color: red;
+  color: white;
+}
+
+.green {
+  margin-left: 1%;
+  font-size: 1.1em;
+  width: 5em;
+  border: 1px solid green;
+  line-height: 1.6em;
+  border-radius: 4%;
+  background-color: green;
+  color: white;
 }
 
 /*** TABLE ***/

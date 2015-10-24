@@ -9,8 +9,8 @@
 <div class="price">
   <div id="ticker"><%= @ticker%></div>
   <div id="price"><%= @price%></div>
-  <div id="change"><%= @price_change%></div>
-  <div id="change"><%= @percentage_change_display%></div>
+  <div class="change <%= @new_price_class%>"><%= @price_change%></div>
+  <div class="change <%= @new_percentage_class%>"><%= @percentage_change_display%></div>
 </div>
 
 

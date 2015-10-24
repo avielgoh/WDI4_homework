@@ -49,6 +49,8 @@ end
 # Display information about stock
 get '/stock/:ticker' do
 
+
+# YahooFinance::get_quotes(YahooFinance::StandardQuote, "AAPL")['AAPL'].change.split(' - ')[0][0]
   @ticker = params[:ticker]
 
   data = YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}") # standard information
@@ -59,6 +61,19 @@ get '/stock/:ticker' do
   @price_change = data["#{@ticker}"].change.split(' - ')[0]
   @percentage_change = data["#{@ticker}"].change.split(' - ')[1]
   @percentage_change_display = "(#{@percentage_change})"
+
+  # Toggle between green and red based on '+' or '-' stock movement
+  if @price_change[0] == '+'
+    @new_price_class = 'green'
+  else
+    @new_price_class = 'red'
+  end
+
+  if @percentage_change[0] == '+'
+    @new_percentage_class = 'green'
+  else
+    @new_percentage_class = 'red'
+  end
 
   @name = data["#{@ticker}"].name
 
