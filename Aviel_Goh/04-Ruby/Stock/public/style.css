@@ -12,17 +12,29 @@ body {
   background-color: black;
   color: white;
   overflow: hidden;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   max-width: 480px;
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 4em;
+  margin: 0 auto;
+  margin-top: 5%;
+  background-color: white;
+  color: black;
+  width: 420px;
 }
 
 h3 {
   margin: 1%;
   font-size: 1em;
+  text-transform: uppercase;
+  font-weight: normal;
 }
 
 .container {
@@ -33,7 +45,7 @@ h3 {
   display: inline-block;
   border: none;
   border-bottom: 2px solid white;
-  margin: 3%;
+  margin: 5%;
 }
 
 input {
@@ -60,21 +72,22 @@ button {
   font-size: 1.5em;
 }
 
+/*** QUOTE DISPLAY ***/
 .price {
   display: block;
   border: none;
-  margin: 10%;
+  margin: 10% 0 10% 0;
 }
 
 #ticker, #change, #price {
   display: inline-block;
   vertical-align: middle;
-  line-height: 2em;
+  line-height: 2.3em;
 }
 
 #ticker, #price {
-  margin-right: 4%;
-  font-size: 1.8em;
+  margin-right: 3%;
+  font-size: 2.3em;
   font-weight: bold;
 }
 
@@ -84,11 +97,13 @@ button {
 
 #change {
   margin-left: 1%;
-  font-size: 1em;
+  font-size: 1.1em;
   width: 5em;
   border: 1px solid white;
-  line-height: 1.3em;
-  border-radius: 9%;
+  line-height: 1.6em;
+  border-radius: 4%;
+  background-color: white;
+  color: black;
 }
 
 /*** TABLE ***/
@@ -106,6 +121,10 @@ td {
   border-bottom: 1px solid grey;
   padding-top: 1%;
   padding-bottom: 1%;
+}
+
+.bottom-line {
+  border-bottom: 0;
 }
 
 .keys {

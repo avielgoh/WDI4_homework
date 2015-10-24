@@ -3,24 +3,50 @@ require 'sinatra'
 require 'yahoofinance'
 require 'sinatra/reloader'
 
-=begin
-
-YahooFinance::get_quotes(YahooFinance::StandardQuote, 'AAPL')['AAPL'].lastTrade
-
-=end
-
+# Home
 get '/' do
+
+  @ticker = ""
+  @price = "-"
+  @price_change = "-"
+  @percentage_change_display = "-"
+  @name = ""
+  @tablename = ""
+
   erb :index
+
 end
 
+# Check whether ticker exists
 get '/stock' do
 
   @ticker = params[:ticker]
 
-  redirect to "/stock/#{@ticker}"
+  if YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}").empty?
+    redirect to "/error"
+  elsif YahooFinance::get_quotes(YahooFinance::StandardQuote, "#{@ticker}")["#{@ticker}"].date == "N/A"
+    redirect to "/error"
+  else
+    redirect to "/stock/#{@ticker}"
+  end
 
 end
 
+# Error if ticker not found
+get '/error' do
+
+  @ticker = ""
+  @price = "-"
+  @price_change = "-"
+  @percentage_change_display = "-"
+  @name = ""
+  @tablename = "TICKER NOT FOUND"
+
+  erb :index
+
+end
+
+# Display information about stock
 get '/stock/:ticker' do
 
   @ticker = params[:ticker]
@@ -32,9 +58,11 @@ get '/stock/:ticker' do
   @price = data["#{@ticker}"].lastTrade
   @price_change = data["#{@ticker}"].change.split(' - ')[0]
   @percentage_change = data["#{@ticker}"].change.split(' - ')[1]
+  @percentage_change_display = "(#{@percentage_change})"
 
   @name = data["#{@ticker}"].name
 
+  @tablename = "#{@name} (#{@ticker})"
   @open = data["#{@ticker}"].open
   @high = data["#{@ticker}"].dayHigh
   @low = data["#{@ticker}"].dayLow

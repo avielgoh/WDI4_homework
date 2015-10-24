@@ -1,5 +1,5 @@
 <div class="search-box">
-  <form class="" action="/stock" method="get">
+  <form class="" action="/stock" method="get" autocomplete="off">
     <input type="text" name="ticker" placeholder="Search by ticker">
     <button type="button" name="find-button"><i class="fa fa-search"></i></button>
   </form>
@@ -10,11 +10,12 @@
   <div id="ticker"><%= @ticker%></div>
   <div id="price"><%= @price%></div>
   <div id="change"><%= @price_change%></div>
-  <div id="change">(<%= @percentage_change%>)</div>
+  <div id="change"><%= @percentage_change_display%></div>
 </div>
 
 
-<h3><%= @name%> (<%= @ticker%>)</h2>
+<h3><%= @tablename%></h3>
+
 <table class="table" align="center" cellspacing="0px">
   <tr>
     <td class="keys">OPEN</td>
@@ -46,11 +47,10 @@
     <td class="keys keys_mid">YIELD</td>
     <td class="values"> <%= @yield%> </td>
   </tr>
-  <tr>
-    <td class="keys">EBITDA</td>
-    <td class="values values_mid"> <%= @ebitda%> </td>
-    <td class="keys keys_mid">EPS</td>
-    <td class="values"> <%= @eps%> </td>
+  <tr class="bottom-line">
+    <td class="keys bottom-line">EBITDA</td>
+    <td class="values values_mid bottom-line"> <%= @ebitda%> </td>
+    <td class="keys keys_mid bottom-line">EPS</td>
+    <td class="values bottom-line"> <%= @eps%> </td>
   </tr>
-
 </table>
