@@ -51,9 +51,8 @@ begin
 
   if input == '3' # create new animal
 
-    animal_num = 6
     puts 'Please enter animal name:'
-    name = gets.chomp.to_s
+    @name = gets.chomp.to_s
     puts 'Please enter animal age:'
     age = gets.chomp.to_i
     puts 'Please enter animal gender (M/F):'
@@ -62,55 +61,99 @@ begin
     species = gets.chomp.to_s
 
     $shelter[:animals] << Animal.new(name, age, gender, species)
+    puts "#{@name}'s animal profile has been created."
 
   end
 
   if input == '4' # create new client
 
     puts 'Please enter client name:'
-    name = gets.chomp.to_s
+    @name = gets.chomp.to_s
     puts 'Please enter client age:'
     age = gets.chomp.to_i
     puts 'Please enter number of kids:'
     kids = gets.chomp.to_i
 
     $shelter[:clients] << Client.new(name, age, kids)
+    puts "#{@name}'s client profile has been created."
 
   end
 
   if input == '5' # adopt animal
 
     puts 'Please enter client name:'
-    client_name = gets.chomp.to_s
-    puts 'Please enter animal name:'
-    animal_name = gets.chomp.to_s
-
-    # get index of animal adopted based on name
-    animal_index = $shelter[:animals].index { |i| i.name == animal_name }
+    @client_name = gets.chomp.to_s
 
     # get index of client based on name
-    client_index = $shelter[:clients].index { |i| i.name == client_name }
+    client_index = $shelter[:clients].index { |i| i.name == @client_name }
 
+    while client_index == nil
+      puts 'Client not found. Please enter client name:'
+      @client_name = gets.chomp.to_s
+
+      client_index = $shelter[:clients].index { |i| i.name == @client_name }
+    end
+
+    puts 'Please enter animal name:'
+    @animal_name = gets.chomp.to_s
+
+    # get index of animal adopted based on name
+    animal_index = $shelter[:animals].index { |i| i.name == @animal_name }
+
+    while animal_index == nil
+      puts 'Animal not found. Please enter animal name:'
+      @animal_name = gets.chomp.to_s
+
+      animal_index = $shelter[:animals].index { |i| i.name == @animal_name }
+    end
+
+    puts "Please confirm that #{@client_name} is adopting #{@animal_name} (Y/N):"
+    confirm = gets.chomp.to_s
+
+    if confirm == 'Y'
     # remove adopted animal from shelter and push into client pet list
     $shelter[:clients][client_index].num_pets << $shelter[:animals].delete_at(animal_index)
+    else
+    end
 
   end
 
   if input == '6' # surrender animal
 
     puts 'Please enter client name:'
-    client_name = gets.chomp.to_s
-    puts 'Please enter animal name:'
-    animal_name = gets.chomp.to_s
+    @client_name = gets.chomp.to_s
 
     # get index of client based on name
-    client_index = $shelter[:clients].index { |i| i.name == client_name }
+    client_index = $shelter[:clients].index { |i| i.name == @client_name }
+
+    while client_index == nil
+      puts 'Client not found. Please enter client name:'
+      @client_name = gets.chomp.to_s
+
+      client_index = $shelter[:clients].index { |i| i.name == @client_name }
+    end
+
+    puts 'Please enter animal name:'
+    @animal_name = gets.chomp.to_s
 
     # get index of animal given up based on client index
-    animal_index = $shelter[:clients][client_index].num_pets.index { |i| i.name == animal_name }
+    animal_index = $shelter[:clients][client_index].num_pets.index { |i| i.name == @animal_name }
 
+    while animal_index == nil
+      puts 'Animal not found. Please enter animal name:'
+      @animal_name = gets.chomp.to_s
+
+      animal_index = $shelter[:clients][client_index].num_pets.index { |i| i.name == @animal_name }
+    end
+
+    puts "Please confirm that #{@client_name} is surrendering #{@animal_name} (Y/N):"
+    confirm = gets.chomp.to_s
+
+    if confirm == 'Y'
     # remove surrendered animal from client pet list to shelter
     $shelter[:animals] << $shelter[:clients][client_index].num_pets.delete_at(animal_index)
+    else
+    end
 
   end
 
