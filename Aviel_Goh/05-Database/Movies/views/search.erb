@@ -1,0 +1,36 @@
+<header class="search-bar">
+  <form class="form" action="/search" method="post" autocomplete="off">
+    <input class="input-bar" type="text" name="name" placeholder="Search by title">
+    <!-- <button>Search!</button> -->
+  </form>
+</header>
+
+<h2>Results for '<%= @name.gsub('+', ' ') %>'</h2>
+<table class="search-table" align="center" cellspacing="0px">
+
+  <% @movie_info['Search'].each do |movie| %>
+    <tr class="search-results">
+      <td class="search-poster">
+        <a href="/movie/<%= movie['Title']%>"><img id="search-thumbnail" src="<%= movie['Poster'] %>" alt="" /></a>
+      </td>
+
+      <td class="search-title">
+        <p>
+          <a href="/movie/<%= movie['Title']%>"><%= movie['Title'] %></a> (<%= movie['Year'] %>)
+        </p>
+      </td>
+    </tr>
+  <% end %>
+
+</table>
+
+<!-- <% @movie_info['Search'].each do |movie| %>
+
+
+  <a href="/movie/<%= movie['Title']%>">
+    <h2> <%= movie['Title'] %> </h2>
+  </a>
+
+  <img src="<%= movie['Poster'] %>" alt="" />
+
+<% end %> -->

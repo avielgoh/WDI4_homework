@@ -1,0 +1,29 @@
+<header class="search-bar">
+  <form class="form" action="/search" method="post" autocomplete="off">
+    <input class="input-bar" type="text" name="name" placeholder="Search by title">
+    <!-- <button>Search!</button> -->
+  </form>
+</header>
+
+
+<table class="result-table" align="center" cellspacing="0px">
+
+  <tr>
+    <td class="result-poster">
+      <img id="description-thumbnail" src="<%= @poster %>" alt="" />
+    </td>
+
+    <td class="result-description">
+      <div id="title"><%= @movie_info['Title'] %></div>
+      <div id="year">(<%= @movie_info['Year'] %>)</div>
+      <div id="info"><%= @movie_info['Rated'] %> | <%= @movie_info['Runtime'] %> | <%= @movie_info['Genre'] %> | <%= @movie_info['Released'] %></div>
+      <div id="rating">IMDb Rating: <%= @movie_info['imdbRating'] %></div>
+      <div class="people">Plot: <%= @movie_info['Plot'] %></div>
+      <div class="people">Director: <%= @movie_info['Director'] %></div>
+      <div class="people">Writers: <%= @movie_info['Writer'] %></div>
+      <div class="people">Actors: <%= @movie_info['Actors'] %></div>
+    </td>
+  </tr>
+
+
+</table>
