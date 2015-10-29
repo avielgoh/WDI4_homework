@@ -1,0 +1,13 @@
+<header class="header-bar">
+  <a href="/"> <img src="../logo.png" alt="" id="logo"/> </a>
+  <div class="search-bar">
+    <form class="form" action="/search" method="post" autocomplete="off">
+      <span class="input-logo"><i class="fa fa-search"></i></span>
+      <input class="input-bar" type="text" name="name" placeholder="Search by title" required="required">
+    </form>
+  </div>
+</header>
+
+<div class="error-message">
+  <%= @error_title %>
+</div>
