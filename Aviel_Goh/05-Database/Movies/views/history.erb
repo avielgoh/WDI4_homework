@@ -11,17 +11,17 @@
 
 
 <table class="search-table" align="center" cellspacing="0px">
-  <caption> <h2>Results for '<%= @name.gsub('+', ' ') %>'</h2> </caption>
+  <caption> <h2>Search history</h2> </caption>
 
-  <% @movie_info['Search'].each do |movie| %>
+  <% @movie_info.each do |index| %>
     <tr class="search-results">
       <td class="search-poster">
-        <a href="/movie/<%= movie['imdbID']%>"><img id="search-thumbnail" src="<%= movie['Poster'] %>" alt="" /></a>
+        <a href="/movie/<%= index.imdbid %>"><img id="search-thumbnail" src="<%= index.poster %>" alt="" /></a>
       </td>
 
       <td class="search-title">
         <p>
-          <a href="/movie/<%= movie['imdbID']%>"><%= movie['Title'] %></a> (<%= movie['Year'] %>)
+          <a href="/movie/<%= index.imdbid %>"><%= index.title %></a> (<%= index.year %>)
         </p>
       </td>
     </tr>

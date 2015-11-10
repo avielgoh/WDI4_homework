@@ -115,15 +115,19 @@ get '/movie/:name/:id' do
   erb :about
 end
 
-# # display could not find if not found
-# get '/movie/*' do
-#   @error_title = params[:splat][0].gsub('+', ' ')
-#   @title = "ERROR: Could not find '#{ @error_title }'! "
-#
-#   erb :about
-# end
-#
+# display search history
+get '/history' do
 
+  @movie_info = Movie.all
+
+  
+
+  # if @movie_info['Response'] == "False"
+  #   redirect to "/error/#{ @name }"
+  # end
+
+  erb :history
+end
 
 get '/error/:name' do
 
